@@ -9,7 +9,6 @@ on:
 jobs:
   security-ci:
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -30,12 +29,11 @@ jobs:
     - name: Build Docker image
       run: docker build -t webapp:ci .
 
-    - name: Install Trivy
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y wget
-        wget https://github.com/aquasecurity/trivy/releases/latest/download/trivy_0.50.1_Linux-64bit.deb -O trivy.deb
-        sudo dpkg -i trivy.deb
-
-    - name: Scan Docker image using Trivy (fail on HIGH/CRITICAL)
-      run: trivy image --exit-code 1 --severity HIGH,CRITICAL webapp:ci
+    - name: Scan Docker image using Trivy (action)
+      uses: aquasecurity/trivy-action@v1
+      with:
+        image-ref: webapp:ci
+        format: table
+        severity: HIGH,CRITICAL
+        ignore-unfixed: false
+        exit-code: '1'
