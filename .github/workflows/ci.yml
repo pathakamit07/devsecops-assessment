@@ -9,6 +9,7 @@ on:
 jobs:
   security-ci:
     runs-on: ubuntu-latest
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -29,11 +30,11 @@ jobs:
     - name: Build Docker image
       run: docker build -t webapp:ci .
 
-    - name: Scan Docker image using Trivy (action)
-      uses: aquasecurity/trivy-action@v1
+    - name: Trivy vulnerability scan
+      uses: aquasecurity/trivy-action@0.18.0
       with:
         image-ref: webapp:ci
         format: table
         severity: HIGH,CRITICAL
-        ignore-unfixed: false
         exit-code: '1'
+        ignore-unfixed: false
