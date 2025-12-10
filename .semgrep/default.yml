@@ -1,0 +1,7 @@
+﻿rules:
+  - id: detect-eval
+    patterns:
+      - pattern: eval(...)
+    message: 'Avoid using eval() — it introduces security risks.'
+    severity: ERROR
+    languages: [javascript]
