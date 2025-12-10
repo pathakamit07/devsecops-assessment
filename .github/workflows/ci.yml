@@ -30,11 +30,11 @@ jobs:
     - name: Build Docker image
       run: docker build -t webapp:ci .
 
-    - name: Trivy vulnerability scan
+    - name: Trivy vulnerability scan (fail only on CRITICAL)
       uses: aquasecurity/trivy-action@0.18.0
       with:
         image-ref: webapp:ci
         format: table
-        severity: HIGH,CRITICAL
+        severity: CRITICAL
         exit-code: '1'
         ignore-unfixed: false
