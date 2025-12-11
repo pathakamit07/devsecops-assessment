@@ -1,0 +1,16 @@
+﻿# Terraform local folder & providers (do NOT commit provider binaries)
+.terraform/
+terraform/.terraform/
+
+# Terraform state & sensitive files
+*.tfstate
+*.tfstate.backup
+*.tfvars
+
+# OS / editor
+.vscode/
+__pycache__/
+*.log
+
+# Windows binaries (optional)
+*.exe
