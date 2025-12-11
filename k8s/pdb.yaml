@@ -1,0 +1,10 @@
+﻿apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: webapp-pdb
+  namespace: devsecops
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: webapp

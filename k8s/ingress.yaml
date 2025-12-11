@@ -1,0 +1,19 @@
+﻿apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: webapp-ingress
+  namespace: devsecops
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+  - host: webapp.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: webapp
+            port:
+              number: 80
