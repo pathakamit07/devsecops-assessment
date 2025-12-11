@@ -13,6 +13,7 @@ on:
 jobs:
   security-ci:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -39,14 +40,9 @@ jobs:
           push: false
 
       - name: Run Trivy image scan (fail on CRITICAL)
-        uses: aquasecurity/trivy-action@v0.18.0
-        with:
-          image-ref: webapp:ci
-          format: table
-          severity: CRITICAL
-          exit-code: 1
-          scan-type: image
-          vuln-type: os,library
+        # Use official Trivy container to run a scan (no action version dependency)
+        run: |
+          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest image --severity CRITICAL --exit-code 1 webapp:ci
 
       - name: Login to GitHub Container Registry (GHCR)
         if: ${{ success() }}
