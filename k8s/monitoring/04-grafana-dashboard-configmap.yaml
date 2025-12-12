@@ -1,0 +1,29 @@
+﻿apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-dashboard-sample
+  namespace: monitoring
+  labels:
+    grafana_dashboard: "1"
+data:
+  sample-dashboard.json: |-
+    {
+      "dashboard": {
+        "uid": "simple-prom",
+        "title": "Simple Prometheus CPU",
+        "panels": [
+          {
+            "type": "graph",
+            "title": "CPU usage (container CPU seconds total)",
+            "gridPos": { "h": 8, "w": 24, "x": 0, "y": 0 },
+            "targets": [
+              {
+                "expr": "sum(rate(container_cpu_usage_seconds_total[5m])) by (pod)",
+                "legendFormat": "{{pod}}"
+              }
+            ]
+          }
+        ]
+      },
+      "overwrite": true
+    }
