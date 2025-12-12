@@ -16,8 +16,7 @@ Files:
 2. cd terraform
 3. terraform init
 4. terraform validate
-5. terraform plan  # NOTE: plan may attempt provider calls when credentials are set; safe for review
-
+5. terraform plan  
 ## Security scanning
 - tfsec: `tfsec .`
 - checkov: `checkov -d .`
