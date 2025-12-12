@@ -4,10 +4,10 @@ metadata:
   name: webapp
   namespace: devsecops
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: webapp
   ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 3000
+    - port: 80
+      targetPort: 3000
+      nodePort: 30080
